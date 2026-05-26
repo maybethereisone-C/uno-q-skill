@@ -1,0 +1,76 @@
+/*
+ * Minimal baseline styles. Based on the palette from
+ * app-bricks-examples/examples/blink-with-ui/assets/style.css
+ * plus the CSS-variable approach from the agent-template frontend.md.
+ * TODO restyle to taste.
+ */
+
+:root {
+    --bg: #ECF1F1;
+    --text: #2C353A;
+    --accent: #008184;       /* Arduino teal */
+    --accent-hi: #00b3b8;
+    --surface: #DAE3E3;
+    --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 24px 40px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.arduino-text {
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.arduino-logo { height: 24px; width: auto; }
+
+.container { text-align: center; }
+
+.metric {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 24px 0;
+}
+
+#action-button {
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    border-radius: var(--radius);
+    padding: 0.7rem 1.4rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+#action-button:hover { background: var(--accent-hi); }
+#action-button:active { transform: scale(0.96); }
+
+.error-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 768px) {
+    body { padding: 12px 20px; }
+    .arduino-text { font-size: 14px; }
+}

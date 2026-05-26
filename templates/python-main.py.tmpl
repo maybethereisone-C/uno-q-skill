@@ -1,0 +1,44 @@
+# Linux entry point — runs on the Qualcomm/Debian side of the UNO Q.
+# Based on: app-bricks-examples/examples/blink-with-ui/python/main.py
+#           and real-time-accelerometer/python/main.py
+#
+# Pattern: import bricks -> instantiate -> register handlers -> App.run().
+# App.run() MUST be the last line; it blocks and runs the runtime forever.
+
+from arduino.app_utils import *                      # App, Bridge, Logger, ...
+from arduino.app_bricks.web_ui import WebUI          # one import per brick in app.yaml
+# from arduino.app_bricks.object_detection import ObjectDetection   # TODO add your bricks
+
+# --- Logger (optional but recommended) ---------------------------------------
+logger = Logger("my-app")                            # TODO rename
+
+# --- Global state ------------------------------------------------------------
+# Keep app state in module-level variables; mutate inside handlers with `global`.
+state = {"value": 0}                                 # TODO model your real state
+
+# --- Web UI ------------------------------------------------------------------
+ui = WebUI()
+
+def on_get_initial_state(client, data):
+    """Send current state to a client that just connected/asked."""
+    ui.send_message("state_update", state, client)   # 3rd arg targets one client
+
+def on_command(client, data):
+    """Handle a command sent from the browser via socket.emit('command', {...})."""
+    # TODO read data, update state
+    # Example: push a value to the MCU over the Router Bridge (see references/bridge-rpc.md)
+    # Bridge.call("set_led_state", bool(data.get("on")))
+    ui.send_message("state_update", state)           # broadcast to all clients
+
+# Register socket message handlers. The event name here must match socket.emit(name) in app.js.
+ui.on_message("get_initial_state", on_get_initial_state)
+ui.on_message("command", on_command)
+
+# --- MCU -> Linux push (only if your sketch calls Bridge.notify) -------------
+# def record_sample(x: float, y: float, z: float):
+#     """Called from the sketch via Bridge.notify('record_sample', x, y, z)."""
+#     ui.send_message("sample", {"x": x, "y": y, "z": z})
+# Bridge.provide("record_sample", record_sample)     # expose so the sketch can reach it
+
+# --- Run ---------------------------------------------------------------------
+App.run()                                            # blocks — keep this last

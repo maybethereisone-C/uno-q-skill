@@ -1,0 +1,42 @@
+// MCU firmware — runs on the STM32U585 microcontroller of the UNO Q.
+// Based on: app-bricks-examples/examples/blink-with-ui/sketch/sketch.ino
+//           and real-time-accelerometer/sketch/sketch.ino
+//
+// Two comms directions over the Router Bridge (see references/bridge-rpc.md):
+//   Linux -> MCU : Bridge.provide("name", fn)  here  + Bridge.call("name", ...)  in Python
+//   MCU -> Linux : Bridge.notify("name", ...)  here  + Bridge.provide("name", fn) in Python
+
+#include <Arduino_RouterBridge.h>
+// #include <Arduino_Modulino.h>     // TODO uncomment if using Modulino sensors
+// #include <Arduino_LED_Matrix.h>   // TODO uncomment if driving the LED matrix
+
+void setup() {
+    // --- Hardware init (TODO) ---
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);   // built-in LED is active-LOW: HIGH = off
+
+    // --- Open the bridge to Linux ---
+    Bridge.begin();
+
+    // --- Expose functions Linux can call (Linux -> MCU) ---
+    Bridge.provide("set_led_state", set_led_state);   // TODO rename / add your RPCs
+}
+
+void loop() {
+    // RPC-driven apps often leave loop() empty.
+    // For sensor streaming, sample on an interval and Bridge.notify(...) up to Linux:
+    //
+    // static unsigned long last = 0;
+    // const long interval = 100;                       // ms
+    // unsigned long now = millis();
+    // if (now - last >= interval) {
+    //     last = now;
+    //     float v = analogRead(A0);                    // TODO read your sensor
+    //     Bridge.notify("record_sample", v);           // fire-and-forget to Python
+    // }
+}
+
+// Exposed RPC: Linux calls this via Bridge.call("set_led_state", state)
+void set_led_state(bool state) {
+    digitalWrite(LED_BUILTIN, state ? LOW : HIGH);     // LOW = on for the built-in LED
+}

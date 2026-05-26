@@ -1,0 +1,35 @@
+<!--
+  Web UI entrypoint — REQUIRED by the web_ui brick (served on port 7000).
+  Based on: app-bricks-examples/examples/blink-with-ui/assets/index.html
+  Rule: no CDN at runtime. socket.io.min.js is vendored under assets/libs/.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO App Title</title>
+    <link rel="icon" type="image/png" href="./img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="arduino-text">TODO App Title</h1>
+        <!-- <img class="arduino-logo" src="./img/logo.svg" alt="Logo"> -->
+    </div>
+
+    <main class="container">
+        <!-- TODO replace with your UI. This stub shows a value + a command button. -->
+        <p id="value" class="metric">–</p>
+
+        <button id="action-button">TODO Action</button>
+
+        <!-- Connection-lost banner, toggled by app.js -->
+        <div id="error-container" class="error-message" style="display: none;"></div>
+    </main>
+
+    <!-- Vendored Socket.IO client (download once, commit it). NO CDN at runtime. -->
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# App manifest — declares identity and which bricks the App pulls in.
+# Based on: app-bricks-examples/examples/blink-with-ui/app.yaml
+#
+# Every brick listed here becomes importable in python/main.py as
+#   from arduino.app_bricks.<brick> import <Class>
+# If you import a brick that is NOT listed here, startup will fail.
+
+name: TODO App Name          # shows in the App Lab launcher
+icon: 🧩                     # any single emoji
+description: TODO one-line description of what this app does
+
+bricks:
+  - arduino:web_ui           # serves assets/ on port 7000 + Socket.IO. Remove if headless.
+  # - arduino:object_detection   # TODO uncomment bricks you need (see references/bricks-catalog.md)
+  # - arduino:motion_detection
+  # - arduino:llm
+  # - arduino:keyword_spotting
