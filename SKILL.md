@@ -66,6 +66,18 @@ Full anatomy: **`references/app-anatomy.md`**. Ready-to-copy starters: **`templa
 | Web UI Brick (+ socket.io wiring) | `references/web-ui-brick.md` |
 | Authoring your own custom Brick | `references/custom-bricks.md` |
 | Troubleshooting / gotchas (incl. field tips) | `references/troubleshooting.md` |
+| **Wi-Fi setup AP + captive portal** (headless onboarding; hostapd/NM/single-radio) | `references/wifi-ap-captive-portal.md` |
+| **Bluetooth access** (phone↔board over BT; BlueZ 5.82 NAP/PAN vs BLE-GATT) | `references/bluetooth-access.md` |
+
+## Keep this skill growing (continuous improvement)
+
+When you hit something on this board that has **no reference or best practice here**
+— a new subsystem, a non-obvious failure, a hardware quirk — **research it, verify it
+on the real board, then update this skill**: add or extend a `references/*.md` and
+link it from the index above. The skill must improve alongside the project, so the
+next session starts from what this one learned (don't re-derive). Mark findings
+**VERIFIED on <board> <date>** vs **(unverified)**. (Example: `wifi-ap-captive-portal.md`
+was added this way — net-new headless-onboarding work with no prior reference.)
 
 ## Rules (read before/while coding)
 

@@ -118,7 +118,7 @@ Every build is held to five rule sets in `rules/`. The ones that matter most:
 ```
 uno-q-skill/
 ├── SKILL.md                      # Router — start here; loads references on demand
-├── references/                   # 11 deep-dive guides
+├── references/                   # 13 deep-dive guides
 │   ├── board-architecture.md     # The dual-brain model: A53 Linux + STM32U585 MCU
 │   ├── app-anatomy.md            # App folder structure & how the pieces connect
 │   ├── arduino-app-cli.md        # Full arduino-app-cli + REST API reference
@@ -129,6 +129,8 @@ uno-q-skill/
 │   ├── ollama-on-board.md        # Ollama runtime + running Claude Code on the board
 │   ├── web-ui-brick.md           # arduino:web_ui — Socket.IO dashboards
 │   ├── custom-bricks.md          # Authoring your own Bricks
+│   ├── wifi-ap-captive-portal.md # Headless Wi-Fi: AP, captive portal, station mode
+│   ├── bluetooth-access.md       # Phone ↔ board Bluetooth (BlueZ, PAN/BLE)
 │   └── troubleshooting.md        # Setup, connect, run, AI/model, storage triage
 ├── rules/                        # 5 rule sets (bridge anti-patterns, deploy safety, …)
 ├── workflow/                     # The 6-step build path (step1 … step6)
